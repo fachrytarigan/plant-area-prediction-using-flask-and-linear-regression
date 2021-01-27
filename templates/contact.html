@@ -1,0 +1,76 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container col-md-6 mt-5 justify-content-center">
+  <h3 class="text-center">Prediksi Pertumbuhan Tanaman Aquaponik</h3>
+  <p class="text-center">Masukkan data Suhu Air, PH Air, dan TDS</p>
+  {% if error: %}
+  <p><strong>Error: {{error}}</strong></p>
+  {% endif %}
+  <form action="" method="POST" class="row mb-10">
+    <div class="mb-3 col">
+      <br />
+      <input
+        type="number"
+        class="form-control"
+        id="formGroupExampleInput"
+        name="suhu_air"
+        placeholder="Suhu Air"
+        step="any"
+        min="20"
+        max="30"
+        required
+      />
+    </div>
+    <div class="mb-3 col">
+      <br />
+      <input
+        type="number"
+        class="form-control"
+        id="formGroupExampleInput"
+        name="ph_air"
+        placeholder="pH air"
+        step="any"
+        min="0"
+        max="8"
+        required
+      />
+    </div>
+    <div class="mb-3 col">
+      <br />
+      <input
+        type="number"
+        class="form-control"
+        id="formGroupExampleInput"
+        name="tds"
+        placeholder="tds"
+        step="any"
+        min="0"
+        max="200"
+        required
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary ">Submit</button>
+  </form>
+  {% if context: %}
+  <div class="mt-3">
+    <table class="table table-bordered table-hover mt-5 text-center">
+      <thead>
+        <tr class="table-primary">
+          <th scope="col">Width Prediction</th>
+          <th scope="col">Height Prediction</th>
+          <th scope="col">Non Zero Prediction</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ context.width}} Pixels</td>
+          <td>{{context.height}} Pixels</td>
+          <td>{{context.luas}} Pixels</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

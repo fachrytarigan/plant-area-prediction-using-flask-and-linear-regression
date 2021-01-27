@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Prediksi Pertumbuhan Tanaman</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--===============================================================================================-->
+    <link
+      rel="icon"
+      type="image/png"
+      href="{{ url_for('static', filename='images/icons/favicon.ico') }}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='fonts/Linearicons-Free-v1.0.0/icon-font.min.css') }}"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css" />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='vendor/css-hamburgers/hamburgers.min.css') }}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='vendor/select2/select2.min.css') }}"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/util.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+    <!--===============================================================================================-->
+    <style>
+      .holder {
+        width: 1000px;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="container-contact100"
+      style="background: linear-gradient(to left, #02aab0, #00cdac)"
+    >
+      <div class="wrap-contact100" style="border-radius: 20px">
+        <form
+          class="contact100-form validate-form"
+          action="{{url_for('predict')}}"
+          ,
+          method="POST"
+        >
+          <span class="contact100-form-title">
+            Prediksi Pertumbuhan Tanaman Aquaponik</span
+          >
+
+          <div class="wrap-input100 validate-input" data-validate="Wajib diisi">
+            <span class="label-input100">Masukkan suhu air *</span>
+            <input
+              class="input100"
+              type="number"
+              step="any"
+              name="suhu_air"
+              placeholder="Suhu air"
+              pattern="[-+]?[0-9]*[.,]?[0-9]+"
+              min="25"
+              max="28"
+            />
+          </div>
+
+          <div
+            class="wrap-input100 validate-input"
+            data-validate="Valid email is required: ex@abc.xyz"
+          >
+            <span class="label-input100">Masukkan TDS *</span>
+            <input
+              class="input100"
+              type="number"
+              step="any"
+              name="tds"
+              placeholder="TDS"
+              pattern="[-+]?[0-9]*[.,]?[0-9]+"
+              min="150"
+              max="200"
+            />
+          </div>
+
+          {% if context: %}
+
+          <!-- <div style="width: 500px; max-width: 100%">
+              <div
+                style="height: 0; padding-bottom: 104.29%; position: relative"
+              >
+                <iframe
+                  width="500"
+                  height="500"
+                  style="
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                  "
+                  frameborder="0"
+                  src="https://imgflip.com/embed/4uz54n"
+                ></iframe>
+              </div>
+            </div> -->
+
+          <div class="wrap-input100">
+            <img
+              src="{{url_for('static', filename='images/data_3D_akuaponik.png')}}"
+              alt="3D Data"
+              style="width: 100%"
+            />
+          </div>
+
+          <div class="wrap-input100">
+            <table
+              class="table table-bordered table-hover text-center align-center"
+            >
+              <thead class="text-center align-center">
+                <tr class="table-primary">
+                  <th scope="col">Width Prediction</th>
+                  <th scope="col">Height Prediction</th>
+                  <th scope="col">Non Zero Prediction</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{ context.width}} Pixels</td>
+                  <td>{{context.height}} Pixels</td>
+                  <td>{{context.luas}} Pixels</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          {% endif %}
+
+          <div class="container-contact100-form-btn">
+            <div class="wrap-contact100-form-btn">
+              <div class="contact100-form-bgbtn"></div>
+              <button
+                class="contact100-form-btn"
+                style="background: linear-gradient(0.25turn, #02aab0, #00cdac)"
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <span class="contact100-more"> Created by Fachry Tarigan - 161402033 </span>
+    </div>
+
+    <div id="dropDownSelect1"></div>
+
+    <!--===============================================================================================-->
+    <script src="{{url_for('static', filename='vendor/jquery/jquery-3.2.1.min.js')}}"></script>
+    <!--===============================================================================================-->
+    <script src="{{url_for('static', filename='vendor/bootstrap/js/popper.js')}}"></script>
+    <script src="{{url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+    <!--===============================================================================================-->
+    <script src="{{url_for('static', filename='vendor/select2/select2.min.js')}}"></script>
+    <!--===============================================================================================-->
+    <script src="{{url_for('static', filename='js/main.js')}}"></script>
+    <!--===============================================================================================-->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
+      integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      var ctx = document.getElementById("myChart");
+      var myRadarChart = new Chart(ctx, {
+        type: "radar",
+        data: {
+          labels: ["Suhu Air", "PH Air", "TDS"],
+          datasets: [
+            {
+              label: "Width",
+              backgroundColor: "rgba(00, 255, 00, 0.1)",
+              borderColor: "#00ff00",
+              borderWidth: 2,
+              data: [20, 10, 50],
+            },
+            {
+              label: "Height",
+              backgroundColor: "rgba(00, 255, 00, 0.1)",
+              borderColor: "#FFff00",
+              borderWidth: 2,
+              data: [20, 120, 4],
+            },
+            {
+              label: "Non Zero",
+              backgroundColor: "rgba(00, 255, 00, 0.1)",
+              borderColor: "#FF0197",
+              borderWidth: 2,
+              data: [75, 150, 4],
+            },
+          ],
+        },
+      });
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-23581568-13");
+    </script>
+  </body>
+</html>
